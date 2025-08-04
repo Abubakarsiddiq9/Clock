@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Circle Live Clock</title>
+  <style>
+    body {
+      background: #1e1e1e;
+      color: white;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    .clock {
+      width: 200px;
+      height: 200px;
+      border: 8px solid #00bfff;
+      border-radius: 50%;
+      position: relative;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .hand {
+      position: absolute;
+      background-color: white;
+      top: 50%;
+      left: 50%;
+      transform-origin: bottom center;
+      transform: translateX(-50%) translateY(-100%) rotate(0deg);
+    }
+
+    .hour {
+      width: 6px;
+      height: 50px;
+      background-color: #00bfff;
+    }
+
+    .minute {
+      width: 4px;
+      height: 70px;
+      background-color: #aaa;
+    }
+
+    .second {
+      width: 2px;
+      height: 90px;
+      background-color: red;
+    }
+
+    .center-dot {
+      width: 10px;
+      height: 10px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="clock">
+    <div class="hand hour" id="hour-hand"></div>
+    <div class="hand minute" id="minute-hand"></div>
+    <div class="hand second" id="second-hand"></div>
+    <div class="center-dot"></div>
+  </div>
+
+  <script>
+    function updateAnalogClock() {
+      const now = new Date();
+      const sec = now.getSeconds();
+      const min = now.getMinutes();
+      const hr = now.getHours() % 12;
+
+      const secondDeg = sec * 6;
+      const minuteDeg = min * 6 + sec * 0.1;
+      const hourDeg = hr * 30 + min * 0.5;
+
+      document.getElementById('second-hand').style.transform = `translateX(-50%) translateY(-100%) rotate(${secondDeg}deg)`;
+      document.getElementById('minute-hand').style.transform = `translateX(-50%) translateY(-100%) rotate(${minuteDeg}deg)`;
+      document.getElementById('hour-hand').style.transform = `translateX(-50%) translateY(-100%) rotate(${hourDeg}deg)`;
+    }
+
+    setInterval(updateAnalogClock, 1000);
+    updateAnalogClock(); // Call once to initialize immediately
+  </script>
+
+</body>
+</html>
