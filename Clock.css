@@ -76,7 +76,7 @@
     .center-dot {
       width: 10px;
       height: 10px;
-      background: white;
+      background: rgb(117, 117, 117);
       border-radius: 50%;
       position: absolute;
       top: 50%;
@@ -93,16 +93,35 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 20px;
     padding-left: 5px;
     padding-right: 5px;
 }
+
 .Time span{
   font-weight: bold;
   width: 80px;
   text-align: center;
   font-size: 70px;
   color: white;
+  position: relative;
+  
+}
+.Time span::after{
+    font-size: 15px;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+#hrs::after{
+    content: 'Hours';
+}
+#min::after{
+    content: 'Mins';
+}
+#sec::after{
+    content: 'Sec';
 }
 .StopTimer{
     margin-left: 30px;
