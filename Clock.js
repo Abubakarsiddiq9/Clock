@@ -25,3 +25,100 @@ function updateAnalogClock() {
     setInterval(updateAnalogClock, 1000);
     updateAnalogClock(); // Call once to initialize immediately
   
+const stopwatchbtn=document.getElementById('stopwatchbtn');
+const timerbtn=document.getElementById('timerbtn');
+const main=document.querySelector('.main')
+const timerContainer = document.getElementById('timerContainer');
+let intervalId = null; // to hold timer interval
+
+timerbtn.addEventListener('click',()=>{
+  
+  // Below two lines control which part of the webpage is visible by changing the CSS display property using JavaScript.
+  
+  main.style.display = 'none';
+ 
+  //➡️ This hides the element with class .main (most likely your clock UI), by setting its display to 'none'.
+ 
+  timerContainer.style.display = 'block';
+ 
+  //➡️ This shows the element with id="timerContainer" by setting its display to 'block'.
+  //This logic is useful when you're switching views in a single-page interface:
+ 
+  timerContainer.innerHTML=`
+  <style>
+    body{
+      color: rgb(0, 0, 0);
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: bold;
+    }
+  </style>
+  <div class="blue"> 
+    <button class="closeTimer js-closeTimer">X</button>
+    <h1 style="margin-left: 40%;margin-bottom: 20%;margin-top: 10%;">Timer</h1>
+      <div class="timerBelow">
+      <div>
+        <p style="font-size: 18px;">Select Time (hh:mm:ss):</p>
+        <input class="inputbox" type="time" id="myTime" step="1" value="00:01:00">
+      </div>
+      <div class="timerdiv timerjs">
+        <span id="hrsT">00</span>
+        <span>:</span>
+        <span id="minT">00</span>
+        <span >:</span>
+        <span id="secT">00</span>
+      </div>
+      <button class="StartBtn startcss">Start</button>
+      </div>
+  </div>
+  `;
+
+  const timeInput=document.getElementById('myTime');
+    const StartBtn=document.querySelector('.StartBtn');
+    const hrsSpan = document.getElementById('hrsT');
+    const minSpan = document.getElementById('minT');
+    const secSpan = document.getElementById('secT');    
+    let intervalId;
+    StartBtn.addEventListener('click',()=>{
+      let timeInputgot=timeInput.value;
+      if (timeInputgot) {
+      const [hours, minutes, seconds = "00"] = timeInputgot.split(':');
+     let totalSeconds =
+        parseInt(hours) * 3600 +
+        parseInt(minutes) * 60 +
+        parseInt(seconds);
+
+       clearInterval(intervalId);
+
+      updateDisplay(totalSeconds);
+
+      intervalId = setInterval(() => {
+        totalSeconds--;
+        if (totalSeconds < 0) {
+          clearInterval(intervalId);
+          alert('Time up!')
+          return;
+        }
+        updateDisplay(totalSeconds);
+      }, 1000);
+    } else {
+      alert('Please enter a valid time');
+    }
+    
+  });
+  function updateDisplay(totalSeconds) {
+    const hrsT = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+    const minsT = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+    const secsT = String(totalSeconds % 60).padStart(2, '0');
+
+    hrsSpan.textContent = hrsT;
+    minSpan.textContent = minsT;
+    secSpan.textContent = secsT;
+  }
+  const closeBtn = document.querySelector('.js-closeTimer');
+closeBtn.addEventListener('click', () => {
+  clearInterval(intervalId);
+  timerContainer.style.display = 'none';
+  main.style.display = 'block'; // show clock again
+  timerContainer.innerHTML = '';
+});
+});

@@ -136,6 +136,18 @@
     border-radius: 20px;
     font-weight: bold;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+.buttonSt:hover,.alarmButton:hover {
+  background-color: black;
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Active (when clicked) effect */
+.buttonSt:active,.alarmButton:active {
+  transform: scale(0.95);
+  background-color: #444;
 }
 .Alarm{
     width: 100%;
@@ -143,6 +155,7 @@
     display: flex;
     justify-content: center;
     margin-top: 30px;
+
 }
 .alarmButton{
     border: 2px black solid;
@@ -152,4 +165,72 @@
     height: 90px;
     width: 390px;
     cursor: pointer;
+    transition: all 0.3s ease;
+
 }
+/* Timer css */
+.blue{
+    width: 450px;
+    height: 670px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(143, 143, 146);
+    
+    }
+    .timerdiv{
+      background-color: rgb(84, 82, 82);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 50px;
+      font-size: 37px;
+      
+      padding: 10px;
+      border-radius: 10px;
+    }
+    .inputbox{
+      padding: 15px;
+      font-size: 25px;
+      border: none;
+      border-radius: 20px;
+      background-color: rgb(205, 200, 200);
+      margin-left: 15px;
+    }
+    .timerBelow{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      background-color: rgb(102, 103, 102);
+      padding: 15px;
+    }
+    .startcss{
+      padding: 18px;
+      font-weight: bold;
+      font-size: 30px;
+      border-radius: 5px;
+      border: none;
+      transition: background-color 0.3s ease, transform 0.1s ease;
+      cursor: pointer;
+    }
+    .startcss:hover {
+  background-color: #302f2f; 
+  color: white;
+}
+
+.startcss:active {
+  background-color: #0a0a0a; 
+  transform: scale(0.97);   
+}
+
+    .closeTimer{
+      border: none;
+      width: 25px;
+      height: 25px;
+      font-weight: bold;
+    }
+    .closeTimer:hover{
+      cursor: pointer;
+      background-color: rgb(148, 39, 39);
+    }
