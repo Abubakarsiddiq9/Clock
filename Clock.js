@@ -25,11 +25,9 @@ function updateAnalogClock() {
     setInterval(updateAnalogClock, 1000);
     updateAnalogClock(); // Call once to initialize immediately
   
-const stopwatchbtn=document.getElementById('stopwatchbtn');
 const timerbtn=document.getElementById('timerbtn');
 const main=document.querySelector('.main')
 const timerContainer = document.getElementById('timerContainer');
-let intervalId = null; // to hold timer interval
 
 timerbtn.addEventListener('click',()=>{
   
@@ -37,11 +35,11 @@ timerbtn.addEventListener('click',()=>{
   
   main.style.display = 'none';
  
-  //➡️ This hides the element with class .main (most likely your clock UI), by setting its display to 'none'.
+  //This hides the element with class .main , by setting its display to 'none'.
  
   timerContainer.style.display = 'block';
  
-  //➡️ This shows the element with id="timerContainer" by setting its display to 'block'.
+  //This shows the element with id="timerContainer" by setting its display to 'block'.
   //This logic is useful when you're switching views in a single-page interface:
  
   timerContainer.innerHTML=`
@@ -121,4 +119,41 @@ closeBtn.addEventListener('click', () => {
   main.style.display = 'block'; // show clock again
   timerContainer.innerHTML = '';
 });
+});
+ 
+
+const stopwatchBtn = document.getElementById('stopwatchbtn');  
+const stopWatchContainer = document.getElementById('stopWatchContainer');
+
+ stopwatchBtn.addEventListener('click', () => {
+  main.style.display = 'none';
+  stopWatchContainer.style.display = 'block';
+
+  // Load stopwatch.html into the container
+  fetch('stopwatch.html')
+    .then(response => response.text())
+    .then(html => {
+      stopWatchContainer.innerHTML = html;
+
+      const closeBtn = stopWatchContainer.querySelector('.closeStopw');
+closeBtn.addEventListener('click', () => {
+  // ✅ Stop stopwatch if it's running
+  if (window.stopwatchControl && typeof window.stopwatchControl.cleanup === 'function') {
+    window.stopwatchControl.cleanup();
+  }
+
+  stopWatchContainer.style.display = 'none';
+  main.style.display = 'block';
+  stopWatchContainer.innerHTML = '';
+});
+
+      // ✅ Load script dynamically and ensure it runs
+      const script = document.createElement('script');
+      script.src = 'stopwatch.js';
+      script.onload = () => {
+        // Optional: you can run init code here if needed
+        console.log('stopwatch.js loaded!');
+      };
+      document.body.appendChild(script);
+    });
 });

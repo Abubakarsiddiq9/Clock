@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+  <style>
+    .stopWatch{   
+    background-color: rgb(188, 202, 108);
+    width: 450px;
+    height: 670px;
+    padding-left: 20px;
+    padding-top: 5px;
+    border-radius: 5px;
+    }
+    .toptext{
+      display: block;
+      
+      margin-bottom: 13px;
+    }
+    .stopWdis{
+      width: 230px;
+      margin-left: 20%;
+      margin-top: 35%;
+      padding: 15px;
+      padding-left: 15px;
+      font-size: 35px;
+      background-color: rgb(34, 178, 104);
+      color: white;
+      border-radius: 5px;
+    }
+    .stopwbtns{
+      background-color: rgb(45, 138, 122);
+      width:230px ;
+      display: flex;
+      gap: 5px;
+     margin-left: 21.5%;
+     margin-top: 10px;
+     padding: 7PX;
+     border-radius: 5px;
+
+    }
+    .stopwbtn{
+      flex: 1;
+      background-color: #6dce66;
+      font-size: 20px;
+      border-radius: 5px;
+      border: none;
+      transition: all 0.3s ease;
+    }
+    .stopwbtn:hover {
+  background-color: rgb(85, 141, 43);
+  color: white;
+  transform: scale(1.05);
+}
+
+/* Active (when clicked) effect */
+.stopwbtn:active{
+  transform: scale(0.95);
+  background-color: #648f3f;
+}
+    .cs-milsec{
+      font-size: 27px;
+    }
+    .cs-reset{
+      width: 30px;
+      mix-blend-mode: multiply;
+      /* removes background */
+    }
+    .closeStopw{
+      float: right;
+      margin-right: 10px;
+      margin-top: 10px;
+      padding: 2px 5px;
+      cursor: pointer;
+    }
+    .closeStopw:hover{
+      transform: scale(0.95);
+      background-color: #c62727;
+      border: none;
+    }
+  </style>
+<body>
+  <div class="stopWatch">
+    <button class="closeStopw">X</button>
+    <h1>Stopwatch</h1>
+    <div class="stopWdis">
+      <span class="toptext">Are you ready?</span>
+      <span class="stopTime" id="minutesSt">00</span>
+      <span>:</span>
+      <span class="stopTime" id="secondsSt">00</span>
+      <span>.</span>
+      <span class="stopTime cs-milsec" id="millisecondsSt">00</span>
+      
+    </div>
+  <div class="stopwbtns">
+  <button class="stopwbtn js-startBtn">Start</button>
+  <button class="stopwbtn js-stopBtn">Stop</button>
+  <button class="stopwbtn js-resetBtn"><img class="cs-reset" src="Reset.png" alt=""></button>
+  </div>
+  </div>
+<script src="stopwatch.js"></script>
+
+</body>
+</html>
