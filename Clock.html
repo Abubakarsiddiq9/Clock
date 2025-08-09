@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="Clock.css">
+    <link rel="stylesheet" href="alarm.css">
 </head>
 <body>
     <div class="Hero">
@@ -42,13 +43,15 @@
                 <button class="buttonSt" id="timerbtn">Timer</button>
             </div>
             <div class="Alarm">
-                <button class="alarmButton">Set alarm</button>
+                <button class="alarmButton" id="setAlarmbtn">Set alarm</button>
             </div>
 
         </div>
         <div id="timerContainer" style="display: none;"></div>
         <div id="stopWatchContainer" style="display: none;"></div>
+        <div id="alarmContainer" style="display: none;"></div>
     </div>    
- <script src="Clock.js"></script>
+ <script type="module" src="Clock.js"></script>
+ <script type="module" src="alarm.js"></script>
 </body>
 </html>

@@ -1,3 +1,4 @@
+import { initAlarmUI,destroyAlarmUI } from "./alarm.js";
 function updateAnalogClock() {
       const now = new Date();
       const sec = now.getSeconds();
@@ -136,11 +137,11 @@ const stopWatchContainer = document.getElementById('stopWatchContainer');
       stopWatchContainer.innerHTML = html;
 
       const closeBtn = stopWatchContainer.querySelector('.closeStopw');
-closeBtn.addEventListener('click', () => {
-  // ✅ Stop stopwatch if it's running
-  if (window.stopwatchControl && typeof window.stopwatchControl.cleanup === 'function') {
-    window.stopwatchControl.cleanup();
-  }
+      closeBtn.addEventListener('click', () => {
+        //Stop stopwatch if it's running
+        if (window.stopwatchControl && typeof window.stopwatchControl.cleanup === 'function') {
+          window.stopwatchControl.cleanup();
+        }
 
   stopWatchContainer.style.display = 'none';
   main.style.display = 'block';
@@ -151,9 +152,64 @@ closeBtn.addEventListener('click', () => {
       const script = document.createElement('script');
       script.src = 'stopwatch.js';
       script.onload = () => {
-        // Optional: you can run init code here if needed
         console.log('stopwatch.js loaded!');
       };
       document.body.appendChild(script);
     });
+});
+const setAlarmbtn=document.getElementById('setAlarmbtn');
+const alarmContainer=document.getElementById('alarmContainer');
+// setAlarmbtn.addEventListener('click',()=>{
+//   main.style.display='none';
+//   alarmContainer.style.display='block';
+//   fetch('alarm.html')
+//   .then(response=> response.text())
+//   .then(html=>{
+//     alarmContainer.innerHTML=html;
+//     const alarmclose=document.getElementById('js-closeAlarm');
+//   alarmclose.addEventListener('click',()=>{
+//     alarmContainer.style.display='none';
+//     main.style.display='block';
+//     alarmContainer.innerHTML='';
+//   });
+//   const script=document.createElement('script');
+// script.src = `alarm.js?v=${Date.now()}`;
+//   document.body.appendChild(script);
+//   });
+//     // Load CSS (only needs to be loaded once)
+//   if (!document.querySelector('link[href="alarm.css"]')) {
+//     const link = document.createElement('link');
+//     link.rel = 'stylesheet';
+//     link.href = 'alarm.css';
+//     document.head.appendChild(link);
+//   }
+// });
+setAlarmbtn.addEventListener('click',()=>{
+  main.style.display='none';
+  alarmContainer.style.display='block';
+  alarmContainer.innerHTML=`
+  
+<div class="alarmdiv">
+  <button class="closeAlarm" id="js-closeAlarm">X</button>
+    <h1 style="margin-bottom: 10px;">Alarm</h1>
+    <div style="border-bottom: 2px solid black;height: 50px;">
+    <input type="time" class="csinputAlrm" id="jsinputAlrm">
+    <button class="addAlarm" id="js-addalrm">Add</button>
+    </div>
+    <div id="allAlarms">
+    </div>
+</div>
+
+  `;
+   initAlarmUI();
+
+// attach the close handler (ensure it calls destroy)
+document.getElementById('js-closeAlarm').addEventListener('click', () => {
+  // cleanup intervals and stop audio
+  destroyAlarmUI();
+
+  alarmContainer.style.display = 'none';
+  main.style.display = 'block';
+  alarmContainer.innerHTML = '';
+})
 });
