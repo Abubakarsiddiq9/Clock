@@ -56,7 +56,7 @@ timerbtn.addEventListener('click',()=>{
     <h1 style="margin-left: 40%;margin-bottom: 20%;margin-top: 10%;">Timer</h1>
       <div class="timerBelow">
       <div>
-        <p style="font-size: 18px;">Select Time (hh:mm:ss):</p>
+        <p style="font-size: 18px;color:white;margin-bottom: 15px;">Select Time (hh:mm:ss):</p>
         <input class="inputbox" type="time" id="myTime" step="1" value="00:01:00">
       </div>
       <div class="timerdiv timerjs">
@@ -75,44 +75,88 @@ timerbtn.addEventListener('click',()=>{
     const StartBtn=document.querySelector('.StartBtn');
     const hrsSpan = document.getElementById('hrsT');
     const minSpan = document.getElementById('minT');
-    const secSpan = document.getElementById('secT');    
+    const secSpan = document.getElementById('secT');
     let intervalId;
-    StartBtn.addEventListener('click',()=>{
-      let timeInputgot=timeInput.value;
-      if (timeInputgot) {
-      const [hours, minutes, seconds = "00"] = timeInputgot.split(':');
-     let totalSeconds =
-        parseInt(hours) * 3600 +
-        parseInt(minutes) * 60 +
-        parseInt(seconds);
+    let isRunning = false;
+    let initialTimeSeconds = 0;
+    let currentTimeSeconds = 0;
 
-       clearInterval(intervalId);
+    function updateDisplay(totalSeconds) {
+      const hrsT = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+      const minsT = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+      const secsT = String(totalSeconds % 60).padStart(2, '0');
 
-      updateDisplay(totalSeconds);
+      hrsSpan.textContent = hrsT;
+      minSpan.textContent = minsT;
+      secSpan.textContent = secsT;
+    }
+
+    function stopTimer() {
+      clearInterval(intervalId);
+      intervalId = null;
+      isRunning = false;
+    }
+
+    function resetTimer() {
+      stopTimer();
+      currentTimeSeconds = initialTimeSeconds;
+      updateDisplay(currentTimeSeconds);
+      StartBtn.textContent = 'Start';
+    }
+
+    function startTimer() {
+      if (Number.isNaN(initialTimeSeconds) || initialTimeSeconds < 0) {
+        return;
+      }
+
+      stopTimer();
+      currentTimeSeconds = initialTimeSeconds;
+      updateDisplay(currentTimeSeconds);
+      isRunning = true;
+      StartBtn.textContent = 'Reset';
 
       intervalId = setInterval(() => {
-        totalSeconds--;
-        if (totalSeconds < 0) {
+        currentTimeSeconds--;
+        if (currentTimeSeconds < 0) {
           clearInterval(intervalId);
-          alert('Time up!')
+          intervalId = null;
+          isRunning = false;
+          StartBtn.textContent = 'Start';
+          updateDisplay(initialTimeSeconds);
+          alert('Time up!');
           return;
         }
-        updateDisplay(totalSeconds);
+        updateDisplay(currentTimeSeconds);
       }, 1000);
-    } else {
-      alert('Please enter a valid time');
     }
-    
-  });
-  function updateDisplay(totalSeconds) {
-    const hrsT = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
-    const minsT = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
-    const secsT = String(totalSeconds % 60).padStart(2, '0');
 
-    hrsSpan.textContent = hrsT;
-    minSpan.textContent = minsT;
-    secSpan.textContent = secsT;
-  }
+    StartBtn.addEventListener('click',()=>{
+      if (isRunning) {
+        resetTimer();
+        return;
+      }
+
+      let timeInputgot=timeInput.value;
+      if (timeInputgot) {
+        const [hours, minutes, seconds = "00"] = timeInputgot.split(':');
+        const totalSeconds =
+          parseInt(hours) * 3600 +
+          parseInt(minutes) * 60 +
+          parseInt(seconds);
+
+        if (Number.isNaN(totalSeconds) || totalSeconds < 0) {
+          alert('Please enter a valid time');
+          return;
+        }
+
+        initialTimeSeconds = totalSeconds;
+        currentTimeSeconds = initialTimeSeconds;
+        updateDisplay(currentTimeSeconds);
+        startTimer();
+      } else {
+        alert('Please enter a valid time');
+      }
+    });
   const closeBtn = document.querySelector('.js-closeTimer');
 closeBtn.addEventListener('click', () => {
   clearInterval(intervalId);
@@ -191,7 +235,7 @@ setAlarmbtn.addEventListener('click',()=>{
   
 <div class="alarmdiv">
   <button class="closeAlarm" id="js-closeAlarm">X</button>
-    <h1 style="margin-bottom: 10px;">Alarm</h1>
+    <h1 style="margin-bottom: 10px;color: white">Alarm</h1>
     <div style="border-bottom: 2px solid black;height: 50px;">
     <input type="time" class="csinputAlrm" id="jsinputAlrm">
     <button class="addAlarm" id="js-addalrm">Add</button>

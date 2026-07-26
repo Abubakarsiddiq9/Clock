@@ -6,51 +6,59 @@
   <title>Document</title>
 </head>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
     .stopWatch{   
-    background-color: rgb(188, 202, 108);
-    width: 450px;
-    height: 670px;
-    padding-left: 20px;
-    padding-top: 5px;
+    background:#1E293B;
+    width: min(92vw, 450px);
+    min-height: 420px;
+    padding: 16px;
     border-radius: 5px;
     }
     .toptext{
       display: block;
-      
       margin-bottom: 13px;
     }
     .stopWdis{
-      width: 230px;
-      margin-left: 20%;
-      margin-top: 35%;
+      width: min(100%, 230px);
+      margin: 24px auto 0;
       padding: 15px;
-      padding-left: 15px;
-      font-size: 35px;
-      background-color: rgb(34, 178, 104);
+      font-size: clamp(24px, 5vw, 35px);
+      background-color: rgb(25, 69, 105);
       color: white;
       border-radius: 5px;
+      text-align: center;
     }
     .stopwbtns{
-      background-color: rgb(45, 138, 122);
-      width:230px ;
+      background-color: rgb(13, 51, 123);
+      width: min(100%, 230px);
       display: flex;
       gap: 5px;
-     margin-left: 21.5%;
-     margin-top: 10px;
-     padding: 7PX;
-     border-radius: 5px;
+      margin: 10px auto 0;
+      padding: 7px;
+      border-radius: 5px;
 
     }
     .stopwbtn{
       flex: 1;
-      background-color: #6dce66;
-      font-size: 20px;
+      background-color: rgb(25, 69, 105);
+      font-size: clamp(16px, 3.5vw, 20px);
       border-radius: 5px;
       border: none;
+      color: white;
       transition: all 0.3s ease;
+      padding: 8px 6px;
     }
     .stopwbtn:hover {
-  background-color: rgb(85, 141, 43);
+  background-color: rgb(21, 52, 78);
   color: white;
   transform: scale(1.05);
 }
@@ -58,7 +66,6 @@
 /* Active (when clicked) effect */
 .stopwbtn:active{
   transform: scale(0.95);
-  background-color: #648f3f;
 }
     .cs-milsec{
       font-size: 27px;
@@ -79,6 +86,27 @@
       transform: scale(0.95);
       background-color: #c62727;
       border: none;
+    }
+
+    @media (max-width: 600px) {
+      .stopWatch {
+        width: min(96vw, 450px);
+        padding: 12px;
+      }
+
+      .stopWdis {
+        margin-top: 20px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .stopwbtns {
+        flex-wrap: wrap;
+      }
+
+      .stopwbtn {
+        min-width: 0;
+      }
     }
   </style>
 <body>
