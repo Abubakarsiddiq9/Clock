@@ -161,7 +161,7 @@ timerbtn.addEventListener('click',()=>{
 closeBtn.addEventListener('click', () => {
   clearInterval(intervalId);
   timerContainer.style.display = 'none';
-  main.style.display = 'block'; // show clock again
+  main.style.display = 'flex'; // show clock again
   timerContainer.innerHTML = '';
 });
 });
@@ -188,7 +188,7 @@ const stopWatchContainer = document.getElementById('stopWatchContainer');
         }
 
   stopWatchContainer.style.display = 'none';
-  main.style.display = 'block';
+  main.style.display = 'flex';
   stopWatchContainer.innerHTML = '';
 });
 
@@ -253,7 +253,7 @@ document.getElementById('js-closeAlarm').addEventListener('click', () => {
   destroyAlarmUI();
 
   alarmContainer.style.display = 'none';
-  main.style.display = 'block';
+  main.style.display = 'flex';
   alarmContainer.innerHTML = '';
 })
 });
