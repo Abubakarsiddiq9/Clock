@@ -19,7 +19,7 @@
     .stopWatch{   
     background:#1E293B;
     width: min(92vw, 450px);
-    min-height: 420px;
+    min-height: 385px;
     padding: 16px;
     border-radius: 5px;
     }
@@ -28,7 +28,6 @@
       margin-bottom: 13px;
     }
     .stopWdis{
-      width: min(100%, 230px);
       margin: 24px auto 0;
       padding: 15px;
       font-size: clamp(24px, 5vw, 35px);
@@ -42,7 +41,7 @@
       width: min(100%, 230px);
       display: flex;
       gap: 5px;
-      margin: 10px auto 0;
+      margin: 40px auto 0;
       padding: 7px;
       border-radius: 5px;
 
@@ -96,6 +95,7 @@
 
       .stopWdis {
         margin-top: 20px;
+        font-size: clamp(24px, 7vw, 35px);
       }
     }
 
@@ -107,12 +107,15 @@
       .stopwbtn {
         min-width: 0;
       }
+      .stopWdis {
+        font-size: clamp(24px, 7vw, 35px);
+      }
     }
   </style>
 <body>
   <div class="stopWatch">
     <button class="closeStopw">X</button>
-    <h1>Stopwatch</h1>
+    <h1 style="color: white;">Stopwatch</h1>
     <div class="stopWdis">
       <span class="toptext">Are you ready?</span>
       <span class="stopTime" id="minutesSt">00</span>

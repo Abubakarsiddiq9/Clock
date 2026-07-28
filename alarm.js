@@ -149,7 +149,7 @@ function createAlarm(time, enabled) {
   alarmItem.classList.add('alarm-times');
 
   alarmItem.innerHTML = `
-    <p>${time}</p>
+    <p style="color: white;">${time}</p>
     <div class="right-alrm">
       <label class="switch">
         <input type="checkbox" class="alarm-toggle" ${enabled ? 'checked' : ''}>
